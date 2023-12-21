@@ -15,7 +15,7 @@ class Welcome extends CI_Controller
 
 	public function index()
 	{
-		$data['juventudes'] = $this->AreasSQL->AreaJoin();
+		$data['juventudes'] = $this->AreasSQL->MostrarDatosUsuario();
 		$this->load->view('index', $data);
 	}
 
@@ -26,7 +26,7 @@ class Welcome extends CI_Controller
 			$data['AreaGTO'] = $this->AreasSQL->getAreas();
 			$data['juventudes'] = $this->AreasSQL->AreaJoin();
 
-			$this->load->view('datos', $data);
+			$this->load->view('index', $data);
 		} else {
 			redirect('Welcome/Login');
 		}
@@ -37,6 +37,8 @@ class Welcome extends CI_Controller
 	}
 
 	function EditarUsuario(){
+		session_start();
+		if (count($_SESSION) > 0) { 
 		$ID = $this->input->get('id');
 		$juventudes = $this->CRUDESQL->getDatos($ID);
 		$AreaGTO['AreaGTO'] = $this->AreasSQL->getAreas(); 
@@ -49,6 +51,9 @@ class Welcome extends CI_Controller
 		$this->load->view('Forms/EditUser', $arr);
 		$this->load->view('footer');
 		$this->load->view('footer_js');
+	}else{
+		$this->load->view('NoAutorizado');
+	}
 	}
 	
 }

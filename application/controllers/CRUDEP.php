@@ -40,7 +40,7 @@ class CRUDEP extends CI_Controller
 
     function Actualizar()
     {
-        $Errores = RulesForm($this);
+        $Errores = RulesEdit($this);
         if ($Errores['ok'] == 2) {
             echo json_encode(
                 array(
@@ -58,11 +58,9 @@ class CRUDEP extends CI_Controller
                 'Correo' => $this->input->post('Correo'),
                 'Extension' => $this->input->post('Extension'),
                 'Area' => $this->input->post('Area'),
-                'Status' => $this->input->post('Status')
             );
             $respuesta = $this->CRUDESQL->ActualizarDB($id, $data);
             echo json_encode($respuesta);
         }
     }
-   
 }

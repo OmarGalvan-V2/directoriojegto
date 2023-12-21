@@ -1,7 +1,8 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class CRUDESQL extends CI_Model {
+class CRUDESQL extends CI_Model
+{
 
     function __construct()
     {
@@ -17,7 +18,7 @@ class CRUDESQL extends CI_Model {
         );
     }
 
-    function ActualizarDB($id,$data)
+    function ActualizarDB($id, $data)
     {
         $this->db->where('ID', $id);
         $this->db->update('empleadojuventudes', $data);
@@ -29,13 +30,14 @@ class CRUDESQL extends CI_Model {
 
     function getDatos($id)
     {
-        $query = 'select * from empleadojuventudes where ID = '.$id;
+        $query = 'select * from empleadojuventudes where ID = ' . $id;
         $resultado = $this->db->query($query);
         return $resultado->result_array();
     }
-    
+
     // Esta función actualiza el estado de un empleado por su ID.
-    public function actualizar_estado($ID, $data) {
+    public function actualizar_estado($ID, $data)
+    {
         $this->db->where('ID', $ID);
         $this->db->update('empleadojuventudes', $data);
 

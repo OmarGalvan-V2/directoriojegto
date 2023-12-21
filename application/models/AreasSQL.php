@@ -35,10 +35,21 @@ class AreasSQL extends CI_Model
     }
 
 
+    function MostrarDatosUsuario()
+    {
+        $query = 'SELECT empl.ID, empl.Nombre , empl.Apellido , empl.Materno, empl.Correo ,empl.Extension, empl.Status, Ar.Area 
+                  from empleadojuventudes empl
+                  INNER JOIN areajuventudes Ar ON Ar.ID = empl.Area
+                  WHERE `Status` = 1';
+
+        $resultado = $this->db->query($query);
+        return $resultado->result_array();
+    }
+
     function AreaJoin()
     {
-        $query = 'SELECT empl.ID, empl.Nombre , empl.Apellido , empl.Materno, empl.Correo ,empl.Extension, empl.Status , Ar.Area 
-                  from empleadojuventudes empl 
+        $query = 'SELECT empl.ID, empl.Nombre , empl.Apellido , empl.Materno, empl.Correo ,empl.Extension, empl.Status, Ar.Area 
+                  from empleadojuventudes empl
                   INNER JOIN areajuventudes Ar ON Ar.ID = empl.Area';
 
         $resultado = $this->db->query($query);

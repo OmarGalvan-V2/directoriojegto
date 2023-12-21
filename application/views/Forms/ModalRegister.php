@@ -110,7 +110,7 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button class="btn button-29 mr-auto registrar">
+                <button class="btn btn-outline-primary mr-auto registrar">
                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor"
                         class="bi bi-person-fill-check" viewBox="0 0 16 16">
                         <path
@@ -120,7 +120,7 @@
                     </svg>
                     Registrar Empleado
                 </button>
-                <button type="button" class="btn btn-outline-warning" id="cancelar" data-dismiss="modal">Limpiar Modal</button>
+                <button type="button" class="btn btn-outline-warning" id="cancelar" data-dismiss="modal">Limpiar Formulario</button>
             </div>
         </div>
     </div>

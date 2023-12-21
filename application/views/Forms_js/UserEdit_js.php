@@ -1,55 +1,53 @@
 <script>
 $(document).ready(function() {
-    $('#FormP2').submit(function(e) {
-        e.preventDefault();
+    var datos = $(this).serializeArray();
 
-        var datos = $(this).serializeArray();
-        console.log(datos);
+    $('#FormP').submit(function(e) {
+    // Se previene el envío del formulario por defecto.
+    e.preventDefault();
 
-        $.ajax({
-            url: '<?= base_url("CRUDEP/Actualizar") ?>',
-            type: 'post',
-            data: datos,
-            dataType: 'json',
-            success: function(response) {
-                console.log(response);
+    // Serializa los datos del formulario en un arreglo.
+    var datos = $(this).serializeArray();
+    
+    $.ajax({
+        url: '<?= base_url('CRUDEP/Actualizar') ?>',
+        // URL a la que se enviarán los datos del formulario mediante AJAX.
+        type: 'post',
+        data: datos,
+        dataType: 'json',
+        success: function(response) {
+            // Esta función se ejecuta cuando la solicitud AJAX tiene éxito.
+            if (!response.ok) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'No se ha detectado ningún cambio, favor de realizar un cambio o salir del usuario'
+                });
+                showFormValidationErrors(response.Errors);
 
-                if (!response.ok) {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Oops...',
-                        text: 'Favor De Llenar los datos solicitados'
-                    });
-
-                    // Muestra los errores de validación en el formulario.
-                    showFormValidationErrors(response.Errors);
-                } else {
-                    // Si la respuesta es "ok", muestra un mensaje de éxito y redirige a otra página.
-                    Swal.fire({
-                        title: 'El Usuario se actualizo correctamente!',
-                        text: 'Click para continuar!',
-                        icon: 'success'
-                    }).then(() => {
-                        window.location.href =
-                                'http://localhost/directoriojegto/Welcome/Administracion';
-                    })
-                }
-            },
-            error: function(xhr, status, error) {
-                console.log("Error en la solicitud AJAX:");
-                console.log("Estado: " + status);
-                console.log("Error: " + error);
+            } else {
+                Swal.fire({
+                    title: 'El Usuario ha sido actualizado correctamente!',
+                    text: 'Click para continuar!',
+                    icon: 'success'
+                }).then(() => {
+                    window.location.href =
+                        'http://localhost/directoriojegto/Welcome/administracion';
+                });
             }
-        });
+        },
+        error: function(xhr, status, error) {
+            console.log("Error en la solicitud AJAX:");
+            console.log("Estado: " + status);
+            console.log("Error: " + error);
+        }
     });
 });
 
+});
 
-    // Agregar la funcionalidad para el botón "Registrar Empleado"
-    $('#registrar-2').click(function() {
-        $('#FormP2').submit();
-    });
-    
+
+
 function showFormValidationErrors(arrErrors) {
     // Esta función muestra los errores de validación en el formulario.
 
